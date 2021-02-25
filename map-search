@@ -1,97 +1,27 @@
-<!--HTML Map Begin-->
+<!--Zip Search Begin-->
 <style>
- .image-map-container {clear: both;}
- .image-map-container img {width: 100%; height: auto; position: relative; z-index: 1;}
+.contentTitle {
+    text-transform: none;
+    font-size: 26px;
+    letter-spacing: 0.5px;
+}
+#search-zip-code{
+    width: 350px;
+}
 </style>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/maphilight/1.4.0/jquery.maphilight.min.js"></script>
-
-
-<div class="image-map-container">
-  <img class="usa-map" usemap="#image-map" src="https://static.spacecrafted.com/affd000b20fc4d92b73f101d7ca004f3/i/ba629336e3814ae6a14078bb9ea89bbc/1/4SoifmQpAbHrGFzRuwTbr?dpr=5" alt="">
-</div>
-
-
-<map name="image-map" id="image-map">
-  <area alt="Maine" href="#Maine" coords="1369,188,1344,122,1346,103,1338,80,1350,44,1367,42,1388,42,1408,86,1428,90,1434,107,1439,112,1429,119,1424,126,1404,139,1398,151,1390,157,1391,165,1377,166,1376,185" shape="poly">
-  <area alt="NewHampshire" href="#NewHampshire" coords="1337,124,1351,153,1363,188,1368,194,1359,197,1331,207,1331,186,1332,165,1336,146" shape="poly">
-  <area alt="Vermont" href="#Vermont" coords="1283,146,1327,128,1332,150,1329,159,1328,181,1326,199,1328,210,1311,215,1300,196,1293,181" shape="poly">
-  <area alt="Massachusetts" href="#Massachusetts" coords="1313,216,1357,201,1371,197,1377,208,1377,218,1385,224,1397,228,1408,228,1411,236,1401,241,1390,241,1379,241,1368,230,1354,233,1315,245" shape="poly">
-  <area alt="RhodeIsland" href="#RhodeIsland" coords="1357,233,1370,230,1375,238,1385,246,1385,254,1375,255,1364,263" shape="poly">
-  <area alt="Connecticut" href="#Connecticut" coords="1313,245,1354,234,1361,251,1359,261,1339,271,1318,283" shape="poly">
-  <area alt="NewYork" href="#NewYork" coords="1155,277,1170,255,1167,239,1194,228,1209,228,1218,225,1226,215,1222,201,1247,155,1276,152,1287,163,1291,175,1292,201,1300,205,1308,223,1308,243,1314,259,1317,274,1318,283,1331,278,1346,272,1357,272,1357,280,1336,295,1318,298,1311,287,1300,277,1284,274,1264,264,1160,287" shape="poly">
-  <area alt="NewJersey" href="#NewJersey" coords="1284,276,1308,283,1309,298,1317,303,1319,320,1315,336,1310,349,1286,339,1292,318,1282,308" shape="poly">
-  <area alt="Pennsylvania" href="#Pennsylvania" coords="1142,290,1150,285,1160,290,1260,264,1279,277,1282,292,1283,308,1288,318,1282,334,1247,343,1156,360" shape="poly">
-  <area alt="Delaware" href="#Delaware" coords="1287,342,1300,347,1308,360,1319,369,1326,378,1300,383" shape="poly">
-  <area alt="Maryland" href="#Maryland" coords="1179,358,1284,338,1300,386,1315,386,1318,405,1309,406,1297,410,1282,409,1245,395,1247,386,1245,378,1236,376,1223,379,1220,367,1207,362,1200,367,1196,375,1185,383" shape="poly">
-  <area alt="WashingtonDC" href="#WashingtonDC" coords="1227,380,1227,393,1239,396,1245,391,1245,380,1235,378" shape="poly">
-  <area alt="WestVirginia" href="#WestVirginia" coords="1115,414,1119,398,1126,393,1128,383,1143,373,1151,360,1177,362,1178,379,1181,388,1192,383,1199,370,1208,365,1217,366,1218,375,1209,380,1203,392,1199,404,1183,406,1183,414,1176,420,1170,427,1163,437,1148,444,1137,450,1116,435" shape="poly">
-  <area alt="Virginia" href="#Virginia" coords="1089,488,1119,451,1136,455,1145,446,1152,450,1160,442,1167,436,1182,418,1186,406,1192,410,1200,401,1208,388,1218,379,1226,379,1229,391,1234,398,1243,397,1253,398,1267,410,1278,417,1286,429,1289,439,1300,445,1300,453,1129,484,1110,489" shape="poly">
-  <area alt="NorthCarolina" href="#NorthCarolina" coords="1139,485,1235,464,1248,464,1302,454,1317,473,1309,477,1305,484,1295,494,1288,498,1298,501,1302,511,1284,517,1271,524,1273,533,1267,541,1267,554,1257,547,1251,555,1240,552,1205,533,1179,534,1151,528,1116,538,1072,548,1086,529,1102,524,1119,507,1134,497" shape="poly">
-  <area alt="SouthCarolina" href="#SouthCarolina" coords="1111,543,1151,529,1176,534,1200,534,1245,561,1235,574,1227,588,1222,595,1199,614,1199,623,1185,625,1172,607,1152,595,1111,554" shape="poly">
-  <area alt="Georgia" href="#Georgia" coords="1048,554,1106,548,1110,556,1170,614,1181,629,1191,631,1190,639,1185,649,1178,656,1178,663,1178,671,1178,680,1167,680,1157,684,1081,688,1072,644,1075,631,1064,618" shape="poly">
-  <area alt="Florida" href="#Florida" coords="1005,693,1077,688,1085,692,1152,688,1160,688,1168,680,1176,680,1194,716,1199,733,1209,745,1211,755,1216,763,1218,772,1238,797,1235,808,1238,820,1240,833,1235,842,1235,852,1235,863,1225,866,1208,870,1207,859,1203,850,1183,833,1174,833,1167,821,1170,812,1154,807,1152,794,1159,789,1152,777,1145,762,1147,746,1139,740,1130,735,1121,724,1110,716,1098,714,1095,722,1088,732,1070,732,1060,724,1059,714,1046,714,1031,715,1014,716" shape="poly">
-  <area alt="Alabama" href="#Alabama" coords="976,715,976,564,974,556,1046,554,1060,608,1072,634,1068,651,1073,683,1005,693,1006,704,1005,714,995,719" shape="poly">
-  <area alt="Mississippi" href="#Mississippi" coords="891,692,903,654,901,636,904,623,901,603,920,563,969,556,974,718,949,722,940,696,899,694" shape="poly">
-  <area alt="Tennessee" href="#Tennessee" coords="935,515,989,507,1000,499,1137,486,1119,506,1111,507,1095,526,1088,530,1067,543,927,555,934,534" shape="poly">
-  <area alt="Kentucky" href="#Kentucky" coords="940,504,943,490,953,486,965,477,966,459,1002,457,1007,448,1019,451,1033,433,1037,424,1048,417,1054,411,1089,415,1103,420,1111,432,1116,445,1116,453,1108,458,1084,489,1072,492,993,499,987,504,953,508" shape="poly">
-  <area alt="Ohio" href="#Ohio" coords="1033,325,1077,318,1082,325,1097,311,1108,311,1120,300,1137,296,1151,357,1146,365,1141,374,1125,384,1125,393,1117,401,1114,417,1094,414,1073,411,1049,400" shape="poly">
-  <area alt="Indiana" href="#Indiana" coords="965,329,995,326,1028,327,1044,383,1044,415,1031,424,1031,437,1019,449,1007,442,1005,453,971,455,978,424,969,386" shape="poly">
-  <area alt="Michigan" href="#Michigan" coords="974,323,987,299,987,280,976,258,980,236,974,227,991,211,1000,212,1005,199,1013,184,997,179,978,188,971,199,962,192,949,199,912,179,896,176,885,166,904,153,909,143,938,133,923,155,932,154,945,163,963,166,976,154,991,150,1006,149,1007,159,1018,157,1026,165,1033,166,1042,168,1036,179,1022,176,1031,186,1036,192,1044,192,1051,198,1051,210,1051,227,1053,241,1050,251,1059,247,1064,237,1076,237,1089,280,1086,290,1079,292,1079,300,1077,313,1070,317,1050,321,1028,321,1005,326" shape="poly">
-  <area alt="Wisconsin" href="#Wisconsin" coords="839,197,839,170,865,161,874,168,890,176,896,180,905,180,942,196,948,212,957,216,948,264,948,280,949,307,909,307,878,307,867,300,873,290,868,264,846,245,834,236,829,207" shape="poly">
-  <area alt="Illinois" href="#Illinois" coords="881,313,953,313,969,417,973,435,965,448,958,480,948,482,938,488,927,466,905,448,907,432,892,426,876,402,879,358,894,335" shape="poly">
-  <area alt="Minnesota" href="#Minnesota" coords="724,99,764,95,775,104,817,112,825,117,835,121,854,121,879,117,892,122,891,131,859,144,855,153,846,161,839,172,839,194,828,205,829,230,837,241,852,255,865,265,865,278,746,281,741,199,744,181" shape="poly">
-  <area alt="Iowa" href="#Iowa" coords="746,282,860,282,867,303,874,317,891,330,890,339,876,355,872,378,852,375,772,376,751,325" shape="poly">
-  <area alt="Missouri" href="#Missouri" coords="772,383,855,378,869,387,878,411,887,428,905,437,905,446,908,457,917,466,926,485,938,497,929,507,920,517,909,515,909,507,797,514,788,432,780,417,780,404,773,398" shape="poly">
-  <area alt="Mississippi" href="#Mississippi" coords="793,516,907,507,912,520,930,520,930,534,920,556,912,568,900,594,899,605,900,631,810,634,806,620,798,612,804,590" shape="poly">
-  <area alt="Arkansas" href="#Arkansas" coords="793,515,908,512,914,520,931,523,927,534,920,557,912,570,899,596,899,631,810,636,806,622,798,609,802,574" shape="poly">
-  <area alt="Louisiana" href="#Louisiana" coords="806,639,894,636,898,649,887,689,887,700,931,697,935,704,943,716,945,724,953,729,952,740,961,750,962,759,948,762,935,751,932,762,925,755,917,764,903,760,892,753,883,742,882,753,870,749,839,746,819,750,824,706,819,692,806,661" shape="poly">
-  <area alt="NorthDakota" href="#NorthDakota" coords="570,90,718,95,715,106,722,114,722,124,736,171,737,197,682,193,608,197,563,192" shape="poly">
-  <area alt="SouthDakota" href="#SouthDakota" coords="560,194,682,199,733,202,738,249,737,282,740,313,710,309,697,313,676,305,665,304,632,298,555,291" shape="poly">
-  <area alt="Nebraska" href="#Nebraska" coords="552,295,635,298,665,311,678,311,694,316,710,313,741,317,746,329,751,342,757,349,759,371,766,383,771,397,738,396,728,396,600,393,600,366,547,357" shape="poly">
-  <area alt="Kansas" href="#Kansas" coords="600,398,764,404,772,410,775,424,785,433,788,497,696,499,597,495" shape="poly">
-  <area alt="Oklahoma" href="#Oklahoma" coords="566,502,789,504,797,608,775,605,753,604,741,604,736,598,731,607,718,607,705,608,697,598,688,598,680,590,669,595,654,582,638,582,636,528,568,523" shape="poly">
-  <area alt="Texas" href="#Texas" coords="564,526,634,530,635,585,654,585,663,598,679,598,689,603,697,610,715,608,724,610,735,605,744,616,754,608,773,609,795,617,806,622,803,665,812,682,816,696,820,702,816,750,797,760,785,771,757,786,731,810,716,810,724,817,726,826,728,865,720,877,702,869,674,869,654,839,648,819,604,749,568,745,555,755,554,764,546,771,511,750,490,711,459,675,459,663,552,661,559,609" shape="poly">
-  <area alt="Montana" href="#Montana" coords="312,55,570,92,555,224,400,206,394,218,363,211,353,211,330,186,330,167,321,161,330,143,326,124,319,106,305,86" shape="poly">
-  <area alt="Wyoming" href="#Wyoming" coords="397,211,554,228,543,358,374,342" shape="poly">
-  <area alt="Colorado" href="#Colorado" coords="418,352,546,362,591,370,587,493,472,486,402,475" shape="poly">
-  <area alt="NewMexico" href="#NewMexico" coords="405,480,563,497,563,555,560,578,554,656,462,658,451,661,411,661,411,673,389,670,387,660" shape="poly">
-  <area alt="Idaho" href="#Idaho" coords="286,48,309,56,301,84,312,102,319,121,322,135,325,148,319,161,327,168,330,193,349,215,358,215,376,215,384,223,389,230,376,302,313,292,235,276,244,212,273,170,257,146,279,86" shape="poly">
-  <area alt="Utah" href="#Utah" coords="300,295,372,309,369,342,415,351,398,473,273,455" shape="poly">
-  <area alt="Arizona" href="#Arizona" coords="270,461,402,482,382,670,327,663,226,607,231,595,228,581,247,551,239,528,248,490,264,490" shape="poly">
-  <area alt="Washington" href="#Washington" coords="109,26,149,39,160,21,283,47,252,143,193,140,154,133,131,131,123,112,101,96,100,80" shape="poly">
-  <area alt="Oregon" href="#Oregon" coords="94,101,123,112,125,128,160,137,250,148,268,167,253,181,244,189,237,214,230,276,45,232,45,220,40,210,53,198,65,172,84,132" shape="poly">
-  <area alt="LasVegas" href="#LasVegas" coords="154,264,299,296,264,484,251,484,244,492,241,504,234,508,188,444,136,367,137,321" shape="poly">
-  <area alt="California" href="#California" coords="43,237,153,265,131,343,131,362,234,517,241,546,225,579,222,595,200,603,151,587,144,579,150,569,138,554,133,546,122,543,120,530,97,517,70,501,71,472,47,427,41,419,48,388,56,378,41,380,21,338,27,329,30,317,21,286,35,273,38,261,44,251" shape="poly">
-  <area alt="Hawaii" href="#Hawaii" coords="317,742,322,731,334,731,341,723,354,723,358,728,358,735,385,745,396,736,405,744,410,751,420,758,450,760,457,768,475,777,475,785,480,792,493,799,506,810,512,816,520,823,519,832,498,842,488,848,473,842,475,829,464,820,472,806,472,793,462,786,451,793,441,784,431,777,422,768,410,762,400,762,392,763,385,757,350,741,336,739,327,744" shape="poly">
-  <area alt="Alaska" href="#Alaska" coords="30,841,71,870,119,877,163,866,199,848,188,838,177,838,176,829,169,821,154,813,167,803,175,793,189,785,203,784,184,767,180,758,186,750,200,750,208,754,200,736,199,723,212,722,243,710,261,715,269,723,279,726,290,728,304,731,304,835,322,847,335,848,353,868,374,896,371,903,344,901,341,888,328,878,319,865,268,837,255,847,241,852,238,863,215,877,203,881,203,870,188,877,158,878,128,883,89,886,52,870,30,854" shape="poly">
-</map>
-
-
-<script>
-(function($) { 
-$(function() {
- $('.usa-map').maphilight({stroke: false});
-});
-})(jQuery);
-</script>
-
-
-<script>
-/*! Image Map Resizer (imageMapResizer.min.js ) - v0.5.3 - 2015-01-29
-*  Desc: Resize HTML imageMap to scaled image.
-*  Copyright: (c) 2015 David J. Bradshaw - dave@bradshaw.net
-*  License: MIT
-*/
-!function(){"use strict";function a(){function a(){function a(a){function c(a){return a*b[1===(d=1-d)?"width":"height"]}var d=0;return a.split(",").map(Number).map(c).map(Math.floor).join(",")}for(var b={width:i.width/j.width,height:i.height/j.height},c=0;g>c;c++)f[c].coords=a(h[c])}function b(){j.onload=function(){(i.width!==j.width||i.height!==j.height)&&a()},j.src=i.src}function c(){function b(){clearTimeout(k),k=setTimeout(a,250)}window.addEventListener?window.addEventListener("resize",b,!1):window.attachEvent&&window.attachEvent("onresize",b)}function d(a){return a.coords.replace(/ *, */g,",").replace(/ +/g,",")}var e=this,f=e.getElementsByTagName("area"),g=f.length,h=Array.prototype.map.call(f,d),i=document.querySelector('img[usemap="#'+e.name+'"]'),j=new Image,k=null;b(),c()}function b(){function b(b){if(!b.tagName)throw new TypeError("Object is not a valid DOM element");if("MAP"!==b.tagName.toUpperCase())throw new TypeError("Expected <MAP> tag, found <"+b.tagName+">.");a.call(b)}return function(a){switch(typeof a){case"undefined":case"string":Array.prototype.forEach.call(document.querySelectorAll(a||"map"),b);break;case"object":b(a);break;default:throw new TypeError("Unexpected data type ("+typeof a+").")}}}"function"==typeof define&&define.amd?define([],b):"object"==typeof exports?module.exports=b():window.imageMapResize=b(),"jQuery"in window&&(jQuery.fn.imageMapResize=function(){return this.filter("map").each(a).end()})}();
-
-
-(function($) { 
-$(function() {
-  $('map').imageMapResize();
-});
-})(jQuery);
-</script>
-<!--HTML Map End-->
+      <div class="zip-finder">
+      <center>
+        <div id="search-by-zip">
+          <form class="fsForm search-techs-form" action="#">
+            <div class="fsRowBody">
+              <input id="search-zip-code" type="tel" maxlength="5" oninput="checkZip()" placeholder="enter zip code here"/>
+             </div>
+          </form>
+          <div class="blockWrap_b1e1fac080a441ab905105178506f2a5">
+            <h2 class="contentTitle">Enter Zip Code Above <i>or</i> Click on the Map Below to Find a Project Manager</h2>
+          </div>
+          <div id="closest-techs-result"></div>
+        </div>
+      </center>
+      </div>
+<!--Zip Search End-->
