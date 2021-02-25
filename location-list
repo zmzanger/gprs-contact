@@ -1,0 +1,243 @@
+<!--
+<div id="map_container">
+  <div id="map" style="border: 1px solid #ccc;padding:10px;height:100%;"></div>
+  <button id="back-btn" class="back-control" title="Back to USA Map" onclick="initMap();">Back to USA Map</button>
+  <div class="controls zoom-control">
+    <button class="zoom-control-in" title="Zoom In">+</button>
+    <button class="zoom-control-out" title="Zoom Out">−</button>
+  </div>
+</div>
+-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcDuti_SpEI50RWLsUEEZANXrusxEFn2Y"></script>
+
+
+<!--Location List Begin-->
+<div id="contact-table">
+</div>
+<!--Location List End-->
+
+
+<!--Map, List, Search Styles Begin-->
+<style type="text/css">
+.search-techs-form {margin-top: 10px;margin-bottom: 10px;}
+.search-techs-form {}
+#closest-techs-result {/*min-height: 25px; margin: 15px 0 0;*/}
+/* Always set the map height explicitly to define the size of the div element that contains the map. */
+#map_container {
+position: relative;
+width: 98%;
+height: 600px;
+padding: 0;
+margin: auto;
+text-align: left;
+}
+#map {border: none !important;}
+#contact-table {width:100%;}
+#contact-table .contact-item {padding: 2em 0; border-bottom: solid 1px #ccc;}
+#contact-table .flex {display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex; flex-wrap: wrap; }
+#contact-table .flex > div {-webkit-box-flex: 1 1 25%; -moz-box-flex: 1 1 25%; width: 25%; -webkit-flex: 1 1 25%; -ms-flex: 1 1 25%; flex: 1; flex: 1 1 25%; max-width: 25%; margin-bottom: 1em;}
+#contact-table .contentTitle {font-size: 1.8em;}
+#contact-table .contact-region {display: block; font-family: brandongrotesquebold,Arial,Verdana,sans-serif; font-size: 1.2em; color: #171717; text-transform: uppercase; font-weight: bold; margin-bottom: 0.5em;}
+#contact-table .phone-num {display: block;}
+.back-control {display: none; position: absolute; top: 23px; left: 23px; z-index: 100; background: #fff; border: solid 1px #b3282d; font-size: 1rem; color: #b3282d; padding: 0.25rem 1rem; cursor: pointer;}
+.controls.zoom-control {position: absolute; top: 5px; right: 5px; z-index: 100; padding: 1rem;}
+.controls.zoom-control button {display: block; width: 40px; height: 40px; border-radius: 5rem; background: #fff; border: solid 1px #b3282d; margin-bottom: 0.25rem; font-size: 1.1rem; color: #b3282d; text-indent: -3px;}
+.controls.zoom-control button:active {border-color: #ccc; }
+#search-by-zip {display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 500px; margin: 25px; padding: 25px; background: rgba(0,0,0,0.4); color: #fff; border: solid 1px #ccc; }
+#search-zip-code {padding: 5px;}
+@media screen and (max-width : 1260px) {
+  #contact-table .flex > div {-webkit-box-flex: 1 1 30%; -moz-box-flex: 1 1 30%; width: 30%; -webkit-flex: 1 1 30%; -ms-flex: 1 1 30%; flex: 1; flex: 1 1 30%; max-width: 30%; }
+}
+@media screen and (max-width : 768px) {
+  #contact-table .flex > div {-webkit-box-flex: 1 1 50%; -moz-box-flex: 1 1 50%; width: 50%; -webkit-flex: 1 1 50%; -ms-flex: 1 1 50%; flex: 1; flex: 1 1 50%; max-width: 50%; }
+}
+@media screen and (max-width : 600px) {
+  #contact-table .flex {display: block;}
+}
+</style>
+
+
+<script>
+var mobile = false; // for map, locations and zip
+if (screen.width <= 800) {
+  mobile = true;
+}
+</script>
+<!--Map, List, Search Styles End-->
+
+
+<!--List Locations & Contacts Script Begin-->
+<script>
+// GPRS - List Locations and Contacts
+
+
+var address_list_3 = null;
+var ver = Date.now();
+var json_file = "https://projects.gp-radar.com/locations.json?v="+ver;
+
+
+// Async request2 to load and parse the json_file into address_list_3 object
+var request2 = new XMLHttpRequest();
+request2.open("GET", json_file);
+request2.overrideMimeType("application/json; charset=utf-8");
+request2.send(null);
+request2.onreadystatechange = function() {
+  //console.log('readyState: '+request2.readyState+' status: '+request2.status);
+  if ( request2.readyState === 4 && request2.status === 200 ) {
+    var json_obj = JSON.parse(request2.responseText);
+    address_list_3 = Object.keys(json_obj.locations).map(function(itm) { return json_obj.locations[itm]; });
+    //address_list_3 = Object.keys(json_obj.locations).map(itm => json_obj.locations[itm]);
+		//address_list_3 = Object.values(json_obj.locations);
+    // Create the contact list table
+    contacts = '<div>';
+    contacts += show_contacts();
+    document.getElementById("contact-table").innerHTML = contacts;
+  }
+}
+
+
+function get_region_image(index) {
+  // region image
+  index = index.replace(/[\. ,:-]+/g, "");
+  var imageList = {
+    Alabama: "Alabama.jpg",
+    Alaska: "WestCoast.jpg",
+    Arizona: "Mountain-Arizona.jpg",
+    Arkansas: "arkansas.jpg",
+    California: "WestCoast.jpg",
+    Colorado: "Mountain.jpg",
+    Connecticut: "Northeast.jpg",
+    Delaware: "Northeast.jpg",
+    Florida: "Florida.jpg",
+    Georgia: "Southeast.jpg",
+    Hawaii: "WestCoast.jpg",
+    Idaho: "Mountain.jpg",
+    Illinois: "Midwest.jpg",
+    Indiana: "Midwest.jpg",
+    Iowa: "Midwest.jpg",
+    Kansas: "Mountain.jpg",
+    Kentucky: "GreatLakes.jpg",
+    Louisiana: "Gulf.jpg",
+    Maine: "Northeast.jpg",
+    Massachusetts: "Northeast.jpg",
+    Maryland: "Northeast.jpg",
+    Michigan: "GreatLakes.jpg",
+    Minnesota: "Midwest.jpg",
+    Mississippi: "Mississippi.jpg",
+    Missouri: "Missouri.jpg",
+    Montana: "Mountain.jpg",
+    Nebraska: "Mountain-Nebraska.jpg",
+    Nevada: "Nevada.jpg",
+    NewHampshire: "Northeast.jpg",
+    NewJersey: "Northeast.jpg",
+    NewMexico: "Mountain.jpg",
+    NewYork: "Northeast.jpg",
+    NorthCarolina: "Southeast.jpg",
+    NorthDakota: "Midwest.jpg",
+    Ohio: "GreatLakes.jpg",
+    Oklahoma: "Texas.jpg",
+    Oregon: "WestCoast.jpg",
+    Pennsylvania: "Pennsylvania.jpg",
+    RhodeIsland: "Northeast.jpg",
+    SouthCarolina: "Southeast.jpg",
+    SouthDakota: "Midwest.jpg",
+    Tennessee: "Southeast.jpg",
+    Texas: "Texas.jpg",
+    Utah: "Mountain-Utah.jpg",
+    Vermont: "Northeast.jpg",
+    Virginia: "Northeast.jpg",
+    WashingtonDC: "Northeast.jpg",
+    Washington: "WestCoast.jpg",
+    WestVirginia: "GreatLakes.jpg",
+    Wisconsin: "Midwest.jpg",
+    Wyoming: "Mountain.jpg"
+  };
+  return imageList[index];
+}
+
+
+
+
+function write_contact(state, contact) {
+  // create the html for this contact
+  var html = '';
+  // contact info
+  if (state) {
+    //var imgName = get_region_image(state)
+    html += '</div></div>'
+    html += '<div style="clear: both; margin-bottom: 25px; ">';
+    html += '<div class="contact-item">';
+    stateid = state.replace(/[\. ,:-]+/g, "");
+    html += '<div id="'+stateid+'" class="contentTitle">'+state+'</div>';
+    html += '<div class="flex">';
+  }
+  html += '<div>';
+  html += '<span class="contact-region">'+contact.name+'</span>';
+  if (contact.contact.Phone1) {
+    //if (!mobile) { // removed 7-31-20
+      //html += '<span class="phone-num">'+contact.contact.Phone1+'</span>';
+    //} else {
+      html += '<span class="phone-num"><a href="tel:'+contact.contact.Phone1+'">'+contact.contact.Phone1+'</a></span>';
+    //}
+  }
+  if (contact.contact.Primary) {
+    html += '<a href="mailto:'+contact.contact.Primary+'">'+contact.contact.Primary+'</a>';
+  }
+  if (contact.contact.Phone2) {
+    //if (!mobile) {
+      //html += '<span class="phone-num">'+contact.contact.Phone2+'</span>';
+    //} else {
+      html += '<span class="phone-num"><a href="tel:'+contact.contact.Phone2+'">'+contact.contact.Phone2+'</a></span>';
+    //}
+  }
+  if (contact.contact.Secondary) {
+    html += '<a href="mailto:'+contact.contact.Secondary+'">'+contact.contact.Secondary+'</a>';
+  }
+  if (contact.contact.Phone3) {
+    //if (!mobile) {
+      //html += '<span class="phone-num">'+contact.contact.Phone3+'</span>';
+    //} else {
+      html += '<span class="phone-num"><a href="tel:'+contact.contact.Phone3+'">'+contact.contact.Phone3+'</a></span>';
+    //}
+  }
+  if (contact.contact.Tertiary) {
+    html += '<a href="mailto:'+contact.contact.Tertiary+'">'+contact.contact.Tertiary+'</a>';
+  }
+  html += '</div>';
+  return html;
+}
+
+
+var contacts = '';
+function show_contacts() {
+  // return the html for all locations and contacts
+  var currentState = null;
+  // sort by name
+  address_list_3.sort(function(a, b){
+    if(a.name < b.name) return -1;
+    if(a.name > b.name) return 1;
+    return 0;
+  });
+  // sort by state
+  address_list_3.sort(function(a, b){
+    if(a.state < b.state) return -1;
+    if(a.state > b.state) return 1;
+    return 0;
+  });
+  for (var i = 0; i < address_list_3.length; i++) {
+    // create the html for each contact
+    var contact = address_list_3[i];
+    var state = address_list_3[i].state;
+    if (state != currentState) {
+      // if the state is not repeating, send the state
+      contacts += write_contact(state, contact);
+      currentState = state;
+    } else {
+      // if the state repeats, just send the contact
+      contacts += write_contact(null, contact);
+    }
+  }
+  return contacts;
+}
+</script>
+<!--List Locations & Contacts Script End-->
