@@ -1,0 +1,126 @@
+<!--Zip Search Begin-->
+<style>
+.contentTitle {
+    text-transform: none;
+    font-size: 26px;
+    letter-spacing: 0.5px;
+}
+#search-zip-code{
+    width: 350px;
+}
+</style>
+      <div class="zip-finder">
+      <center>
+        <div id="search-by-zip">
+          <form class="fsForm search-techs-form" action="#">
+            <div class="fsRowBody">
+              <input id="search-zip-code" type="tel" maxlength="5" oninput="checkZip()" placeholder="enter zip code here"/>
+             </div>
+          </form>
+          <div class="blockWrap_b1e1fac080a441ab905105178506f2a5">
+            <h2 class="contentTitle">Enter Zip Code Above <i>or</i> Click on the Map Below to Find a Project Manager</h2>
+          </div>
+          <div id="closest-techs-result"></div>
+        </div>
+      </center>
+      </div>
+<!--Zip Search End-->
+
+
+<!--Closest Techs by Zip Begin-->
+<script>
+// Get 2 closest technicians by zip code
+
+
+var geocoder;
+// Get zip code from input
+function checkZip() {
+  var z = document.getElementById("search-zip-code").value;
+  if (z.length == 5) { // proceed if 5 chars
+    if (/^\d+$/.test(z)) { // digits only
+      geocodeZip(z);
+    } else {
+      document.getElementById("closest-techs-result").innerHTML = '<span class="error">Error: digits only required.</span>';
+    }
+  }
+}
+// Geocode zip code
+function geocodeZip(z) {
+  geocoder = new google.maps.Geocoder();
+  geocoder.geocode( { 'address': z }, function(results, status) {
+    if (status == 'OK') {
+      var lat = results[0].geometry.location.lat();
+      var lng = results[0].geometry.location.lng();
+      var techs = getClosestTech(z, lat, lng);
+    } else {
+      // Geocode error
+      document.getElementById("closest-techs-result").innerHTML = '<span class="error">Error: valid zip code required.</span>';
+      //console.error('geocode failed: '+status);
+    }
+  });
+}
+// Get closest tech based on lat, lng
+function getClosestTech(zip, lat, lng) {
+  //console.log('closest tech within: '+lat,lng);
+  var mindif = 99999;
+  var closest;
+  // compare each distance with previous
+  for (index = 0; index < address_list_3.length; ++index) {
+    var dif = PythagorasEquirectangular(lat, lng, address_list_3[index].lat, address_list_3[index].lng);
+    if (dif < mindif) {
+      closest = index;
+      mindif = dif;
+    }
+  }
+  // *** Using address_list_3 locations object from locations-section.js
+  document.getElementById("closest-techs-result").innerHTML = techHtml(zip, address_list_3[closest]);
+}
+// Html output for technician
+function techHtml(zip, contact) {
+  var html = '<p>Project manager near <b>'+zip+'</b>:</p>';
+  html += '<p><strong>'+contact.name+'</strong><br>';
+  if (contact.contact.Primary) {
+    html += 'Primary: <a href="mailto:'+contact.contact.Primary+'">'+contact.contact.Primary+'</a>';
+  }
+  if (contact.contact.Phone1) {
+    if (!mobile) {
+      html += ' - <span class="phone-num">'+contact.contact.Phone1+'</span><br>';
+    } else {
+      html += ' - <span class="phone-num"><a href="tel:'+contact.contact.Phone1+'">'+contact.contact.Phone1+'</a></span><br>';
+    }
+  }
+  if (contact.contact.Secondary) {
+    html += 'Secondary: <a href="mailto:'+contact.contact.Secondary+'">'+contact.contact.Secondary+'</a>';
+  }
+  if (contact.contact.Phone2) {
+    html += ' - <span class="phone-num">'+contact.contact.Phone2+'</span><br>';
+  }
+  if (contact.contact.Tertiary) {
+    html += '<a href="mailto:'+contact.contact.Tertiary+'">'+contact.contact.Tertiary+'</a>';
+  }
+  if (contact.contact.Phone3) {
+    html += ' - <span class="phone-num">'+contact.contact.Phone3+'</span>';
+  }
+  html += '</p>';
+  return html;
+}
+// Convert Degress to Radians
+function Deg2Rad(deg) {
+  return deg * Math.PI / 180;
+}
+// Get closest by lat, lng
+function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
+  lat1 = Deg2Rad(lat1);
+  lat2 = Deg2Rad(lat2);
+  lon1 = Deg2Rad(lon1);
+  lon2 = Deg2Rad(lon2);
+  var R = 6371; // km
+  var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+  var y = (lat2 - lat1);
+  var d = Math.sqrt(x * x + y * y) * R;
+  return d;
+}
+
+
+</script>
+<!--Closest Techs by Zip End-->
