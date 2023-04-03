@@ -70,11 +70,11 @@
 
 
 <script>
-(function($) { 
+/*(function($) { 
 $(function() {
  $('.usa-map').maphilight({stroke: false});
 });
-})(jQuery);
+})(jQuery);*/
 </script>
 
 
