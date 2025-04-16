@@ -2377,6 +2377,18 @@
             },
             "lat": 47.653031162908256,
             "lng": -117.41175116716055
+        },
+        "183": {
+            "state": "Missouri",
+            "name": "Kansas City",
+            "contact": {
+                "Primary": "missouriinfo@gprsinc.com",
+                "Phone1": "913-232-6533",
+                "Secondary": "",
+                "Phone2": "",
+                "Tertiary": "",
+                "Phone3": ""
+            }
         }
     }
 }
