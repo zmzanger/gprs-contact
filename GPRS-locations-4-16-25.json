@@ -2392,21 +2392,6 @@
         },
         "184": {
             "state": "Florida",
-            "name": "Pensacola",
-            "url": "state\/florida",
-            "contact": {
-                "Primary": "floridainfo@gprsinc.com",
-                "Phone1": "850-480-7421",
-                "Secondary": "",
-                "Phone2": "",
-                "Tertiary": "",
-                "Phone3": ""
-            },
-            "lat": 30.407538754969362,
-            "lng": -87.22032841785027
-        },
-        "185": {
-            "state": "Florida",
             "name": "Panama City",
             "url": "state\/florida",
             "contact": {
@@ -2420,7 +2405,7 @@
             "lat": 30.160078420134948,
             "lng":  -85.65600782112531
         },
-        "186": {
+        "185": {
             "state": "Florida",
             "name": "Destin",
             "url": "state\/florida",
