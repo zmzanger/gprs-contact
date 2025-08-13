@@ -468,6 +468,7 @@
         "37": {
             "state": "Florida",
             "name": "Tallahassee",
+            "url": "city\/tallahassee-florida",
             "contact": {
                 "Primary": "floridainfo@gprsinc.com",
                 "Phone1": "850-510-7743",
@@ -2422,3 +2423,4 @@
         }
     }
 }
+
