@@ -75,7 +75,8 @@
         },
         "5": {
             "state": "Arizona",
-            "name": "Flagstaff \/ Western AZ",
+            "name": "Flagstaff",
+            "url": "city\/flagstaff",
             "contact": {
                 "Primary": "arizonainfo@gprsinc.com",
                 "Phone1": "928-606-8902",
@@ -2420,7 +2421,23 @@
             },
             "lat": 30.389135054571405,
             "lng": -86.48396876350404
-        }
+        },
+        "186": {
+            "state": "Arizona",
+            "name": "Mesa \/ Gilbert",
+            "url": "city\/mesa",
+            "contact": {
+                "Primary": "arizonainfo@gprsinc.com",
+                "Phone1": "480-227-8614 ",
+                "Secondary": "",
+                "Phone2": "",
+                "Tertiary": "",
+                "Phone3": ""
+            },
+            "lat": 33.4152,
+            "lng": -111.8315
+        },
     }
 }
+
 
